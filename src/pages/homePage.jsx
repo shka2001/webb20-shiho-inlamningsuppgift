@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const token = localStorage.getItem("token");
@@ -22,12 +23,17 @@ function HomePage() {
     <div>
       <h1>Home</h1>
       <table>
-        {customersInfo.map((customer) => (
-          <tr>
-            <td>{customer.name}</td>
-          </tr>
-        ))}
+        <tbody>
+          {customersInfo.map((customer) => (
+            <tr key={customer.id}>
+              <td>
+                <Link to={"/customer/" + customer.id}>{customer.name}</Link>{" "}
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
+      <Link to="/add">Add Customer</Link>
     </div>
   );
 }

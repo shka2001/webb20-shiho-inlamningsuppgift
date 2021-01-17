@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
-function AddCustomerPage() {
+function DetailCustomerPage() {
+  const { customerID } = useParams();
+
   const token = localStorage.getItem("token");
   const [customersInfo, setCustomersInfo] = useState({
     name: "Test Name",
@@ -15,18 +17,24 @@ function AddCustomerPage() {
   });
   const history = useHistory();
 
-  function handleOnChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const newObj = { ...customersInfo, [name]: value };
-    setCustomersInfo(newObj);
+  console.log(customersInfo);
+
+  function fetchCustomerItem() {
+    const url = `https://frebi.willandskill.eu/api/v1/customers/${customerID}/`;
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setCustomersInfo(data));
   }
 
-  function addCustomer() {
-    const url = `https://frebi.willandskill.eu/api/v1/customers/`;
+  function removeCustomer() {
+    const url = `https://frebi.willandskill.eu/api/v1/customers/${customerID}/`;
     fetch(url, {
-      method: "POST",
-      body: JSON.stringify(customersInfo),
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -36,9 +44,6 @@ function AddCustomerPage() {
         if (!res.ok) {
           throw Error(res.statusText);
         }
-        return res.json();
-      })
-      .then((data) => {
         history.push("/home");
       })
       .catch((error) => {
@@ -46,17 +51,19 @@ function AddCustomerPage() {
       });
   }
 
+  useEffect(fetchCustomerItem, [token, customerID]);
+
   return (
     <div>
-      <h1>Add Customer</h1>
+      <h1>{customersInfo.name}</h1>
       <div>
         <div className="label">Name</div>
         <div className="field">
           <input
             type="text"
             name="name"
-            onChange={handleOnChange}
-            value={customersInfo.name}
+            value={customersInfo.name || ""}
+            readOnly
           />
         </div>
         <div className="label">Organisation Number</div>
@@ -64,8 +71,8 @@ function AddCustomerPage() {
           <input
             type="text"
             name="organisationNr"
-            onChange={handleOnChange}
-            value={customersInfo.organisationNr}
+            value={customersInfo.organisationNr || ""}
+            readOnly
           />
         </div>
         <div className="label">VAT Number</div>
@@ -73,8 +80,8 @@ function AddCustomerPage() {
           <input
             type="text"
             name="vatNr"
-            onChange={handleOnChange}
-            value={customersInfo.vatNr}
+            value={customersInfo.vatNr || ""}
+            readOnly
           />
         </div>
         <div className="label">Reference</div>
@@ -82,8 +89,8 @@ function AddCustomerPage() {
           <input
             type="text"
             name="reference"
-            onChange={handleOnChange}
-            value={customersInfo.reference}
+            value={customersInfo.reference || ""}
+            readOnly
           />
         </div>
         <div className="label">Payment Term</div>
@@ -91,8 +98,8 @@ function AddCustomerPage() {
           <input
             type="number"
             name="paymentTerm"
-            onChange={handleOnChange}
-            value={customersInfo.paymentTerm}
+            value={customersInfo.paymentTerm || ""}
+            readOnly
           />
         </div>
         <div className="label">Website URL</div>
@@ -100,8 +107,8 @@ function AddCustomerPage() {
           <input
             type="url"
             name="website"
-            onChange={handleOnChange}
-            value={customersInfo.website}
+            value={customersInfo.website || ""}
+            readOnly
           />
         </div>
         <div className="label">Email</div>
@@ -109,8 +116,8 @@ function AddCustomerPage() {
           <input
             type="email"
             name="email"
-            onChange={handleOnChange}
-            value={customersInfo.email}
+            value={customersInfo.email || ""}
+            readOnly
           />
         </div>
         <div className="label">Phone Number</div>
@@ -118,14 +125,14 @@ function AddCustomerPage() {
           <input
             type="tel"
             name="phoneNumber"
-            onChange={handleOnChange}
-            value={customersInfo.phoneNumber}
+            value={customersInfo.phoneNumber || ""}
+            readOnly
           />
         </div>
-        <button onClick={addCustomer}>Save Customer</button>
       </div>
+      <button onClick={removeCustomer}>Remove {customersInfo.name}</button>
     </div>
   );
 }
 
-export default AddCustomerPage;
+export default DetailCustomerPage;

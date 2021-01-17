@@ -39,11 +39,39 @@ function LoginPage() {
       body: JSON.stringify(dataToSend),
     };
     fetch("https://frebi.willandskill.eu/api-token-auth/", requestOptions)
-      .then((response) => response.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         localStorage.setItem("token", data.token);
+        return fetch("https://frebi.willandskill.eu/api/v1/me/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+      })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("usersFirstName", data.firstName);
+        localStorage.setItem("usersLastName", data.lastName);
+        localStorage.setItem("usersEmail", data.email);
+
         history.push("/home");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
