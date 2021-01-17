@@ -20,9 +20,9 @@ function HomePage() {
   useEffect(fetchCustomers, [token]);
 
   return (
-    <div>
-      <h1>Home</h1>
-      <table>
+    <div className="text-center container">
+      <h1 className="h3 mb-3 fw-normal">Home</h1>
+      <table className="container-fluid">
         <tbody>
           {customersInfo.map((customer) => (
             <tr key={customer.id}>
@@ -33,7 +33,10 @@ function HomePage() {
           ))}
         </tbody>
       </table>
-      <Link to="/add">Add Customer</Link>
+      <br />
+      <Link to="/add">
+        <button className="w-100 btn btn-lg btn-primary">Add Customer</button>
+      </Link>
     </div>
   );
 }

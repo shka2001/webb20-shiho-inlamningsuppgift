@@ -54,75 +54,90 @@ function DetailCustomerPage() {
   useEffect(fetchCustomerItem, [token, customerID]);
 
   return (
-    <div>
+    <div className="w-50 container-fluid">
       <h1>{customersInfo.name}</h1>
       <div>
-        <div className="label">Name</div>
+        <div className="form-label">Name</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="name"
             value={customersInfo.name || ""}
             readOnly
           />
         </div>
-        <div className="label">Organisation Number</div>
+        <br />
+        <div className="form-label">Organisation Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="organisationNr"
             value={customersInfo.organisationNr || ""}
             readOnly
           />
         </div>
-        <div className="label">VAT Number</div>
+        <br />
+        <div className="form-label">VAT Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="vatNr"
             value={customersInfo.vatNr || ""}
             readOnly
           />
         </div>
-        <div className="label">Reference</div>
+        <br />
+        <div className="form-label">Reference</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="reference"
             value={customersInfo.reference || ""}
             readOnly
           />
         </div>
-        <div className="label">Payment Term</div>
+        <br />
+        <div className="form-label">Payment Term</div>
         <div className="field">
           <input
+            className="form-control"
             type="number"
             name="paymentTerm"
             value={customersInfo.paymentTerm || ""}
             readOnly
           />
         </div>
-        <div className="label">Website URL</div>
+        <br />
+        <div className="form-label">Website URL</div>
         <div className="field">
           <input
+            className="form-control"
             type="url"
             name="website"
             value={customersInfo.website || ""}
             readOnly
           />
         </div>
-        <div className="label">Email</div>
+        <br />
+        <div className="form-label">Email</div>
         <div className="field">
           <input
+            className="form-control"
             type="email"
             name="email"
             value={customersInfo.email || ""}
             readOnly
           />
         </div>
-        <div className="label">Phone Number</div>
+        <br />
+        <div className="form-label">Phone Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="tel"
             name="phoneNumber"
             value={customersInfo.phoneNumber || ""}
@@ -130,7 +145,10 @@ function DetailCustomerPage() {
           />
         </div>
       </div>
-      <button onClick={removeCustomer}>Remove {customersInfo.name}</button>
+      <br />
+      <button onClick={removeCustomer} className="w-100 btn btn-lg btn-warning">
+        Remove {customersInfo.name}
+      </button>
     </div>
   );
 }

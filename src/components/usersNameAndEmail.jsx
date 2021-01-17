@@ -6,11 +6,14 @@ function UsersNameAndEmail() {
   const email = localStorage.getItem("usersEmail") || "";
 
   return (
-    <div>
-      <div>{firstName}</div>
-      <div>{lastName}</div>
-      <div>{email}</div>
-    </div>
+    <nav className="navbar navbar-light">
+      <div className="container-fluid">
+        <div>
+          {firstName} {lastName}
+        </div>
+        <div>{email}</div>
+      </div>
+    </nav>
   );
 }
 

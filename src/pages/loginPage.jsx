@@ -76,19 +76,34 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <div>
-        <label>Email</label>
-        {/* <input onChange={handleEmailInput} /> */}
-        <input name="email" onChange={handleOnChange} value={emailInput} />
-        <label>Password</label>
-        {/* <input onChange={handlePasswordInput} /> */}
+    <div className="container">
+      <div className="col">
+        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+        <label className="form-label">Email</label>
+        {/* <input className="form-control"  onChange={handleEmailInput} /> */}
         <input
+          className="form-control"
+          name="email"
+          onChange={handleOnChange}
+          value={emailInput}
+          className="form-control"
+        />
+        <br />
+        <label className="form-label">Password</label>
+        {/* <input className="form-control"  onChange={handlePasswordInput} /> */}
+        <input
+          className="form-control"
           name="password"
           onChange={handleOnChange}
           value={passwordInput}
+          className="form-control"
         />
-        <button onClick={loginButtonClick}>Log In</button>
+        <button
+          onClick={loginButtonClick}
+          className="w-100 btn btn-lg btn-primary"
+        >
+          Log In
+        </button>
       </div>
     </div>
   );

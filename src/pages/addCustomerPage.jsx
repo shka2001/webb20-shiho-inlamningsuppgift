@@ -47,82 +47,100 @@ function AddCustomerPage() {
   }
 
   return (
-    <div>
-      <h1>Add Customer</h1>
+    <div className="container-fluid w-50">
+      <h1 className="h3 mb-3 fw-normal">Add Customer</h1>
       <div>
-        <div className="label">Name</div>
+        <div className="form-label">Name</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="name"
             onChange={handleOnChange}
             value={customersInfo.name}
           />
         </div>
-        <div className="label">Organisation Number</div>
+        <br />
+        <div className="form-label">Organisation Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="organisationNr"
             onChange={handleOnChange}
             value={customersInfo.organisationNr}
           />
         </div>
-        <div className="label">VAT Number</div>
+        <br />
+        <div className="form-label">VAT Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="vatNr"
             onChange={handleOnChange}
             value={customersInfo.vatNr}
           />
         </div>
-        <div className="label">Reference</div>
+        <br />
+        <div className="form-label">Reference</div>
         <div className="field">
           <input
+            className="form-control"
             type="text"
             name="reference"
             onChange={handleOnChange}
             value={customersInfo.reference}
           />
         </div>
-        <div className="label">Payment Term</div>
+        <br />
+        <div className="form-label">Payment Term</div>
         <div className="field">
           <input
+            className="form-control"
             type="number"
             name="paymentTerm"
             onChange={handleOnChange}
             value={customersInfo.paymentTerm}
           />
         </div>
-        <div className="label">Website URL</div>
+        <br />
+        <div className="form-label">Website URL</div>
         <div className="field">
           <input
+            className="form-control"
             type="url"
             name="website"
             onChange={handleOnChange}
             value={customersInfo.website}
           />
         </div>
-        <div className="label">Email</div>
+        <br />
+        <div className="form-label">Email</div>
         <div className="field">
           <input
+            className="form-control"
             type="email"
             name="email"
             onChange={handleOnChange}
             value={customersInfo.email}
           />
         </div>
-        <div className="label">Phone Number</div>
+        <br />
+        <div className="form-label">Phone Number</div>
         <div className="field">
           <input
+            className="form-control"
             type="tel"
             name="phoneNumber"
             onChange={handleOnChange}
             value={customersInfo.phoneNumber}
           />
         </div>
-        <button onClick={addCustomer}>Save Customer</button>
+        <br />
+        <button onClick={addCustomer} className="w-100 btn btn-lg btn-primary">
+          Save Customer
+        </button>
       </div>
     </div>
   );
